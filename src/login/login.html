@@ -1,0 +1,18 @@
+<main class="main">
+    <div class="container-fluid">
+                <p class="text-center" id="infoLabel">Для начала работы нужно войти в систему</p>
+                <div class="welcome-form">
+                    <form role="form" id="loginForm">
+                        <input type="text" class="form-control mb-3" id="loginInput" placeholder="Введите Email">
+                        <input type="password" class="form-control" id="passwordInput" placeholder="Введите пароль">
+                        <div class="form-inline">
+                            <button type="submit" class="btn btn-primary mb-2 mt-2 mr-4"><i class="fa fa-sign-in pr-2" aria-hidden="true"></i>Войти</button>
+                        </div>
+                    </form>
+                </div>
+    </div>
+</main>
+<script>
+    require('./login-view.js');
+    require('../layout/layout.js');
+</script>

@@ -1,0 +1,42 @@
+{
+  "name": "updater",
+  "version": "0.0.1",
+  "description": "Firmware updater for 3voda vending devices",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://shadowlamer@bitbucket.org/third_vending/updater.git"
+  },
+  "author": "Vadim Cherenev <sl@anhot.ru>",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "homepage": "https://bitbucket.org/third_vending/updater#readme",
+  "dependencies": {
+    "bootstrap": "^4.1.3",
+    "drivelist-scanner": "^1.0.0",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.3.1",
+    "moment": "^2.23.0",
+    "momentjs": "^2.0.0",
+    "popper.js": "^1.14.6",
+    "resin-image-write": "^4.0.2",
+    "unbzip2-stream": "^1.3.1"
+  },
+  "devDependencies": {
+    "electron": "^3.0.11",
+    "electron-builder": "^20.38.3"
+  },
+  "build": {
+    "appId": "ru.3voda.updater",
+    "mac": {
+      "category": "Utilities"
+    },
+    "win": {
+      "requestedExecutionLevel": "highestAvailable"
+    }  }
+}

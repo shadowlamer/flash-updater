@@ -1,0 +1,28 @@
+<main class="main">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Контент -->
+            <section class="col-12 article">
+                <div class="update-form">
+                    <form class="form pt-2" role="form" id="loginForm">
+                        <div class="form-inline">
+                            <div id="checkLabel">Поиск обновлений...</div>
+                            <button type="button" id="checkButton"
+                                    class="btn btn-primary mb-2 mt-2 w-100">Проверить обновления
+                            </button>
+                            <div id="updateLabel">Поиск носителя...</div>
+                            <button type="button" id="updateButton" disabled
+                                    class="btn btn-primary mb-2 mt-2 w-100">Обновить ПО
+                            </button>
+                        </div>
+                    </form>
+
+                </div><br />
+            </section>
+        </div>
+    </div>
+</main>
+<script>
+    require('./update-view.js');
+    require('../layout/layout.js');
+</script>
