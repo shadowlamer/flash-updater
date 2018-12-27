@@ -21,6 +21,7 @@ const UPDATER_LOCAL_IMAGE_TEMP_PATH = './downloading';
 const UPDATER_FLASH_CHECK_PATH = '/orangepi/OrangePiH5.dtb';
 
 //application settings
+const UPDATER_WINDOW_TITLE = 'Обновление ПО'
 const UPDATER_FLASH_SCAN_INTERVAL = 5 * 1000; //5 sec
 
 module.exports = {
@@ -37,4 +38,5 @@ module.exports = {
     updater_local_image_temp_path:  UPDATER_LOCAL_IMAGE_TEMP_PATH,
     updater_flash_scan_interval:    UPDATER_FLASH_SCAN_INTERVAL,
     updater_flash_check_path:       UPDATER_FLASH_CHECK_PATH,
+    updater_window_title:           UPDATER_WINDOW_TITLE
 };

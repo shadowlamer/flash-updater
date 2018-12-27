@@ -1,5 +1,6 @@
 // Modules to control application life and create native browser window
 const {app, ipcMain, BrowserWindow} = require('electron');
+const { updater_window_title } = require('./src/tools/constants');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -18,7 +19,8 @@ function go(view) {
 }
 
 function createWindow () {
-  mainWindow = new BrowserWindow({width: 600, height: 470})
+  mainWindow = new BrowserWindow({width: 600, height: 470});
+  mainWindow.setTitle(updater_window_title);
   go('login');
 
   //  mainWindow.webContents.openDevTools();
