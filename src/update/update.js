@@ -2,10 +2,7 @@ const EventEmitter = require('events');
 const { updateService } = require('./update-service');
 const { flashController } = require('../tools/flash');
 const {
-    updater_local_image_path,
-    updater_flash_scan_interval,
-    updater_file_timestamp_field,
-    updater_file_size_field
+    updater_flash_scan_interval
 } = require('../tools/constants');
 
 class UpdateController extends EventEmitter{
@@ -51,22 +48,8 @@ class UpdateController extends EventEmitter{
     }
 
     findLocalImage() {
-        try {
-            let fd = fs.openSync(updater_local_image_path, 'r');
-            let stats = fs.fstatSync(fd);
-            this.localImage = this.statsToImage(stats)
-            this.updateImageStatus(this.localImage);
-        } catch (e) {
-            this.localImage = undefined;
-            this.updateImageStatus(this.localImage);
-        }
-    }
-
-    statsToImage(stats) {
-        let res = {};
-        res[updater_file_timestamp_field] = stats.atimeMs / 1000;
-        res[updater_file_size_field] = stats.size;
-        return res;
+        this.localImage = updateService.findLocalImage();
+        this.updateImageStatus(this.localImage);
     }
 
     findFlash() {
@@ -106,6 +89,7 @@ class UpdateController extends EventEmitter{
 
     onWriteSuccess(data) {
         this.isWriting = false;
+        this.emit('writesuccess', data);
     }
 
     updateImageStatus(image) {

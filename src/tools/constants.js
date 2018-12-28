@@ -14,14 +14,14 @@ const UPDATER_IMAGE_MIME = 'application/octet-stream';
 const UPDATER_IMAGE_EXTENSION = '.img.bz2';
 
 //local image file
-const UPDATER_LOCAL_IMAGE_PATH = './OrangePiH5_PC2.img.bz2';
+const UPDATER_LOCAL_IMAGE_PATH = 'image'+UPDATER_IMAGE_EXTENSION;
 const UPDATER_LOCAL_IMAGE_TEMP_PATH = './downloading';
 
 //file on flash to check
 const UPDATER_FLASH_CHECK_PATH = '/orangepi/OrangePiH5.dtb';
 
 //application settings
-const UPDATER_WINDOW_TITLE = 'Обновление ПО'
+const UPDATER_WINDOW_TITLE = 'Обновление ПО';
 const UPDATER_FLASH_SCAN_INTERVAL = 5 * 1000; //5 sec
 const UPDATER_DOWNLOAD_TIMEOUT = 10 * 60 * 1000; //10 min
 
