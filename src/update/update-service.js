@@ -83,13 +83,15 @@ class UpdateService extends EventEmitter{
     }
 
     onDownloadSuccess(data) {
-        console.log('asd');
-        fs.rename(updater_local_image_temp_path, updater_local_image_path, err => {
-            if (!err && this.checkDownloaded(data))
-                this.emit('downloadsuccess', data);
-            else
-                this.emit('downloaderror', err);
-        });
+        if (data && this.checkDownloaded(data)) {
+            fs.rename(updater_local_image_temp_path, updater_local_image_path, err => {
+                if (!err)
+                    this.emit('downloadsuccess', data);
+                else
+                    this.emit('downloaderror', err);
+            });
+        } else
+            this.emit('downloaderror', data);
     }
 
     onCheckError(data) {
@@ -101,7 +103,7 @@ class UpdateService extends EventEmitter{
     }
 
     checkDownloaded(image) {
-        let stats = fs.statSync(updater_local_image_path);
+        let stats = fs.statSync(updater_local_image_temp_path);
         console.log(stats.size + ' - ' + image[updater_file_size_field]);
         return stats.size === image[updater_file_size_field];
     }

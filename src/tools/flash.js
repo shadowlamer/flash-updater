@@ -16,7 +16,7 @@ class FlashController extends EventEmitter{
             let emitter = imageWrite.write(flash.device, myStream, {
                 check: true,
                 transform: bz2(),
-                size: fs.statSync(imagePath).size
+                size: fs.statSync(updater_local_image_path).size
             });
             emitter.on('progress', state => {this.emit(state.type, (+state.percentage).toFixed(2))});
             emitter.on('error', error => {this.emit('error', error)});
