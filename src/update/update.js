@@ -85,7 +85,7 @@ class UpdateController extends EventEmitter{
     }
 
     onCheckError(data) {
-        console.log(data);
+        this.emit('checkerror', data);
     }
 
     onDownloadProcess(percentage) {
@@ -97,7 +97,6 @@ class UpdateController extends EventEmitter{
     }
 
     onDownloadError(data) {
-        console.log(data);
         this.emit('downloaderror', data);
     }
 
@@ -108,7 +107,6 @@ class UpdateController extends EventEmitter{
 
     onWriteSuccess(data) {
         this.isWriting = false;
-        console.log(data);
     }
 
     updateImageStatus(image) {

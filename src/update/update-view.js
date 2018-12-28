@@ -18,6 +18,7 @@ updateController.on('flash', flash => {updateFlashStatus(flash)});
 updateController.on('downloadprocess', percentage => {displayDownloadProcess(percentage)});
 updateController.on('writeprocess', percentage => {displayWriteProcess(percentage)});
 updateController.on('verifyprocess', percentage => {displayVerifyProcess(percentage)});
+updateController.on('checkerror', error => {displayCheckError(error)});
 updateController.on('downloaderror', error => {displayDownloadError(error)});
 updateController.on('writeerror', error => {displayWriteError(error)});
 
@@ -44,7 +45,7 @@ function updateImageStatus(image) {
         checkLabel.text('Обновлений не обнаружено.');
     }
     buttonsStateController.setImage(image);
-    buttonsStateController.stopDownloading()
+    buttonsStateController.stopDownloading();
 }
 
 function updateFlashStatus(flash) {
@@ -54,7 +55,7 @@ function updateFlashStatus(flash) {
         updateLabel.text(`Обнаружен носитель на диске ${flash.mountpoint}`);
     }
     buttonsStateController.setFlash(flash);
-    buttonsStateController.stopWriting()
+    buttonsStateController.stopWriting();
 }
 
 function displayDownloadProcess(percentage) {
@@ -74,10 +75,17 @@ function updateButtonsStates() {
     updateButton.prop( "disabled", !buttonsStateController.getUpdateButtonState());
 }
 
+function displayCheckError(error) {
+    checkLabel.text(`Не удалось проверить обновления.`);
+    buttonsStateController.stopDownloading();
+}
+
 function displayDownloadError(error) {
     checkLabel.text(`Не удалось загрузить обновление.`);
+    buttonsStateController.stopDownloading();
 }
 
 function displayWriteError(error) {
     updateLabel.text(`Не удалось обновить ПО.`);
+    buttonsStateController.stopWriting()
 }

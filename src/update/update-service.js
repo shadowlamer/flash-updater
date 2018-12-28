@@ -27,7 +27,7 @@ class UpdateService extends EventEmitter{
             type: "GET",
             url: updater_api_path_files,
             success: data => {this.onCheckSuccess(data)},
-            error:   data => {this.emit('checkerror', data)},
+            error:   data => {this.onCheckError(data)},
             contentType: 'application/json',
             headers: {Authorization: 'Bearer ' + this.token}
         });
@@ -66,7 +66,7 @@ class UpdateService extends EventEmitter{
 
     onDownloadSuccess(data) {
         fs.rename(updater_local_image_temp_path, updater_local_image_path, err => {
-            if (!err)
+            if (!err && data)
                 this.emit('downloadsuccess', data);
             else
                 this.emit('downloaderror', err);
