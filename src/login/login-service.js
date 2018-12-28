@@ -1,6 +1,6 @@
 const $ = require('jquery');
 const EventEmitter = require('events');
-const { updater_api_path_authenticate } = require('../tools/constants');
+const { updater_api_url_authenticate } = require('../tools/constants');
 
 class LoginService extends EventEmitter{
 
@@ -15,7 +15,7 @@ class LoginService extends EventEmitter{
         };
         $.ajax({
             type: "POST",
-            url: updater_api_path_authenticate,
+            url: updater_api_url_authenticate,
             data: JSON.stringify(query),
             success: data => {this.emit('success', data)},
             error:   data => {this.emit('error', data)},

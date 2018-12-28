@@ -5,8 +5,7 @@ const {
     updater_local_image_path,
     updater_flash_scan_interval,
     updater_file_timestamp_field,
-    updater_file_size_field,
-    updater_flash_check_path
+    updater_file_size_field
 } = require('../tools/constants');
 
 class UpdateController extends EventEmitter{
