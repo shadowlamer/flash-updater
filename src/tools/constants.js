@@ -42,7 +42,7 @@ module.exports = {
     updater_local_image_path:        UPDATER_LOCAL_IMAGE_PATH,
     updater_local_image_temp_path:   UPDATER_LOCAL_IMAGE_TEMP_PATH,
     updater_flash_scan_interval:     UPDATER_FLASH_SCAN_INTERVAL,
-    updater_download_timeout:        UPDATER_API_HOST,
+    updater_download_timeout:        UPDATER_DOWNLOAD_TIMEOUT,
     updater_flash_check_path:        UPDATER_FLASH_CHECK_PATH,
     updater_window_title:            UPDATER_WINDOW_TITLE
 };
