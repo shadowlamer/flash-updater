@@ -1,10 +1,10 @@
 // Modules to control application life and create native browser window
 const {app, ipcMain, BrowserWindow} = require('electron');
-const { updater_window_title } = require('./src/tools/constants');
+const { i18n } = require('./src/tools/i18n');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindow
+let mainWindow;
 
 ipcMain.on( "setToken", ( event, token ) => {
   global.token = token;
@@ -20,7 +20,7 @@ function go(view) {
 
 function createWindow () {
   mainWindow = new BrowserWindow({width: 600, height: 470});
-  mainWindow.setTitle(updater_window_title);
+  mainWindow.setTitle(i18n.msg('common_app_title'));
   go('login');
 
   //  mainWindow.webContents.openDevTools();
@@ -33,7 +33,7 @@ function createWindow () {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+app.on('ready', createWindow);
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
@@ -42,7 +42,7 @@ app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') {
     app.quit()
   }
-})
+});
 
 app.on('activate', function () {
   // On macOS it's common to re-create a window in the app when the
@@ -50,4 +50,4 @@ app.on('activate', function () {
   if (mainWindow === null) {
     createWindow()
   }
-})
+});

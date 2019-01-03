@@ -7,6 +7,7 @@ const moment = require('moment');
 const { updater_file_timestamp_field } = require('../tools/constants');
 const { updateController } = require('./update');
 const { buttonsStateController } = require('./buttons-state-controller');
+const { i18n } = require('../tools/i18n');
 
 const checkLabel = $('#checkLabel');
 const updateLabel = $('#updateLabel');
@@ -22,27 +23,33 @@ updateController.on('checkerror', error => {displayCheckError(error)});
 updateController.on('downloaderror', error => {displayDownloadError(error)});
 updateController.on('writeerror', error => {displayWriteError(error)});
 
-buttonsStateController.on('update', () => {updateButtonsStates()})
+buttonsStateController.on('update', () => {updateButtonsStates()});
+
+checkButton.text(i18n.msg('update_check_btn_label'));
+updateButton.text(i18n.msg('update_update_btn_label'));
+checkLabel.text(i18n.msg('update_check_message'));
+updateLabel.text(i18n.msg('update_media_message'));
 
 updateController.init();
 buttonsStateController.init();
 
 checkButton.click( () => {
-    buttonsStateController.startDownloading()
+    buttonsStateController.startDownloading();
     updateController.checkUpdate();
 });
 
 updateButton.click( () => {
-    buttonsStateController.startWriting()
+    buttonsStateController.startWriting();
     updateController.writeImage();
 });
 
 function updateImageStatus(image) {
     if (image) {
-        let imgDate = moment(image[updater_file_timestamp_field], 'X').format('DD/MM/YYYY');
-        checkLabel.text(`Обнаружено обновление за ${imgDate}`);
+        let imgDate = moment(image[updater_file_timestamp_field], 'X').format(i18n.msg('common_date_format'));
+        console.log(`${i18n.msg('update_found_update')} ${imgDate}`);
+        checkLabel.text(`${i18n.msg('update_found_update')} ${imgDate}`);
     } else {
-        checkLabel.text('Обновлений не обнаружено.');
+        checkLabel.text(i18n.msg('update_update_not_found'));
     }
     buttonsStateController.setImage(image);
     buttonsStateController.stopDownloading();
@@ -50,24 +57,24 @@ function updateImageStatus(image) {
 
 function updateFlashStatus(flash) {
     if (!flash) {
-        updateLabel.text('Не вставлен носитель.');
+        updateLabel.text(i18n.msg('update_media_not_found'));
     } else {
-        updateLabel.text(`Обнаружен носитель на диске ${flash.mountpoint}`);
+        updateLabel.text(`${i18n.msg('update_found_media')} ${flash.mountpoint}`);
     }
     buttonsStateController.setFlash(flash);
     buttonsStateController.stopWriting();
 }
 
 function displayDownloadProcess(percentage) {
-    checkLabel.text(`Загрузка. Выполнено ${percentage}%.`);
+    checkLabel.text(`${i18n.msg('update_downloading_progress')} ${percentage}%.`);
 }
 
 function displayWriteProcess(percentage) {
-    updateLabel.text(`Обновление. Выполнено ${percentage}%.`);
+    updateLabel.text(`${i18n.msg('update_writing_progress')} ${percentage}%.`);
 }
 
 function displayVerifyProcess(percentage) {
-    updateLabel.text(`Проверка. Выполнено ${percentage}%.`);
+    updateLabel.text(`${i18n.msg('update_verifying_progress')} ${percentage}%.`);
 }
 
 function updateButtonsStates() {
@@ -76,16 +83,19 @@ function updateButtonsStates() {
 }
 
 function displayCheckError(error) {
-    checkLabel.text(`Не удалось проверить обновления.`);
+    console.error(error);
+    checkLabel.text(i18n.msg('update_check_error'));
     buttonsStateController.stopDownloading();
 }
 
 function displayDownloadError(error) {
-    checkLabel.text(`Не удалось загрузить обновление.`);
+    console.error(error);
+    checkLabel.text(i18n.msg('update_download_error'));
     buttonsStateController.stopDownloading();
 }
 
 function displayWriteError(error) {
-    updateLabel.text(`Не удалось обновить ПО.`);
+    console.error(error);
+    updateLabel.text(i18n.msg('update_write_error'));
     buttonsStateController.stopWriting()
 }
